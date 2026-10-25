@@ -3,6 +3,8 @@ const CONFIG = {
   tmdbKey: "b6b677eb7d4ec17f700e3d4dfc31d005",
   tmdbBase: "https://api.themoviedb.org/3",
   imageBase: "https://image.tmdb.org/t/p/original",
+  moviePlayer: id => `https://vidsrc.su/embed/movie/${id}?autoplay=1`,
+  tvPlayer: (id, season, episode) => `https://vidsrc.su/embed/tv/${id}/${season}/${episode}?autoplay=1`,
 };
 
 const searchForm = document.querySelector("#search-form");
@@ -12,6 +14,8 @@ const resultsTitle = document.querySelector("#results-title");
 const resultsCount = document.querySelector("#results-count");
 const statusBox = document.querySelector("#status");
 const details = document.querySelector("#details");
+const player = document.querySelector("#player");
+const playerIframe = document.querySelector("#player-iframe");
 
 function setStatus(message, isError = false) {
   statusBox.textContent = message;
@@ -27,7 +31,7 @@ function createCard(item) {
   const card = document.createElement("button");
   card.className = "movie-card";
   card.type = "button";
-  card.setAttribute("aria-label", `View details for ${item.l}`);
+  card.setAttribute("aria-label", `Play ${item.l}`);
 
   const poster = document.createElement("div");
   poster.className = "poster";
@@ -51,7 +55,7 @@ function createCard(item) {
   meta.textContent = [item.y, item.s].filter(Boolean).join(" • ") || "Title details";
   copy.append(title, meta);
   card.append(poster, tag, copy);
-  card.addEventListener("click", () => openDetails(item));
+  card.addEventListener("click", () => playTitle(item));
   return card;
 }
 
@@ -103,6 +107,27 @@ async function getTmdbDetails(item) {
   return { ...(await response.json()), type };
 }
 
+async function playTitle(item, season = 1, episode = 1) {
+  player.hidden = false;
+  player.querySelector("#player-title").textContent = `Loading ${item.l}…`;
+  playerIframe.src = "about:blank";
+  player.scrollIntoView({ behavior: "smooth", block: "start" });
+
+  try {
+    const data = await getTmdbDetails(item);
+    if (!data?.id) throw new Error("No player identifier found");
+    const isTv = item.qid === "tvSeries";
+    player.querySelector("#player-title").textContent = isTv ? `${item.l} — Season ${season}, Episode ${episode}` : item.l;
+    playerIframe.src = isTv ? CONFIG.tvPlayer(data.id, season, episode) : CONFIG.moviePlayer(data.id);
+    history.replaceState({}, "", isTv
+      ? `?imdb=${encodeURIComponent(item.id)}&season=${season}&episode=${episode}&title=${encodeURIComponent(item.l)}`
+      : `?imdb=${encodeURIComponent(item.id)}&type=movie&title=${encodeURIComponent(item.l)}`);
+  } catch (error) {
+    player.querySelector("#player-title").textContent = "Playback unavailable";
+    console.error(error);
+  }
+}
+
 async function openDetails(item) {
   details.hidden = false;
   details.querySelector("#details-type").textContent = item.qid === "tvSeries" ? "Series details" : "Movie details";
@@ -144,14 +169,38 @@ searchForm.addEventListener("submit", event => {
   searchTitles(searchInput.value);
 });
 
+let searchTimer;
+searchInput.addEventListener("input", () => {
+  clearTimeout(searchTimer);
+  const query = searchInput.value.trim();
+  if (query.length < 2) return;
+  searchTimer = setTimeout(() => searchTitles(query), 500);
+});
+
+document.querySelector("#player-close").addEventListener("click", () => {
+  playerIframe.src = "about:blank";
+  player.hidden = true;
+  const query = searchInput.value.trim();
+  history.replaceState({}, "", query ? `?search=${encodeURIComponent(query)}` : location.pathname);
+});
+
 document.querySelector("#details-close").addEventListener("click", () => {
   details.hidden = true;
   const query = searchInput.value.trim();
   history.replaceState({}, "", query ? `?search=${encodeURIComponent(query)}` : location.pathname);
 });
 
-const initialSearch = new URLSearchParams(location.search).get("search");
+const initialParams = new URLSearchParams(location.search);
+const initialSearch = initialParams.get("search");
 if (initialSearch) {
   searchInput.value = initialSearch;
   searchTitles(initialSearch, false);
+} else if (initialParams.get("imdb")) {
+  const isTv = !initialParams.get("type");
+  const item = {
+    id: initialParams.get("imdb"),
+    l: (initialParams.get("title") || "Selected title").replaceAll("_", " "),
+    qid: isTv ? "tvSeries" : "movie",
+  };
+  playTitle(item, Number(initialParams.get("season")) || 1, Number(initialParams.get("episode")) || 1);
 }

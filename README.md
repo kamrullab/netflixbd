@@ -4,7 +4,7 @@
 [![CI](https://github.com/kamrullab/netflixbd/actions/workflows/ci.yml/badge.svg)](https://github.com/kamrullab/netflixbd/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-NetflixBD is a lightweight, single-page movie and TV discovery interface. It searches IMDb suggestions and uses TMDB metadata to present title details in a clean, responsive interface.
+NetflixBD is a lightweight, single-page movie and TV interface. It searches IMDb suggestions, uses TMDB metadata, and opens selected titles in an external player.
 
 **Live site:** [netflixbd.pages.dev](https://netflixbd.pages.dev/)
 
@@ -17,11 +17,11 @@ NetflixBD is a lightweight, single-page movie and TV discovery interface. It sea
 - Rich title details, genres, ratings, and season counts
 - Responsive, framework-free interface
 - Progressive Web App manifest and service worker
-- No advertising, analytics, popunders, or embedded video providers
+- No first-party ad or analytics scripts
 
 ## How it works
 
-The browser requests search suggestions through the configured CORS proxy, resolves IMDb identifiers to TMDB identifiers, and displays catalogue metadata. The app has no application server or database.
+The browser requests search suggestions through the configured CORS proxy, resolves IMDb identifiers to TMDB identifiers, displays catalogue metadata, and loads selected titles in an external player. The app has no application server or database.
 
 External services currently used by the app:
 
@@ -29,8 +29,9 @@ External services currently used by the app:
 - TMDB metadata API
 - A CORS proxy hosted on Cloudflare Workers
 - Google Fonts
+- `vidsrc.su` video embeds
 
-Third-party catalogue services may have their own privacy practices and availability limits. NetflixBD does not include a video player or streaming embed.
+Third-party services may have their own privacy practices and availability limits. The repository cannot rewrite or control content rendered inside a cross-origin player.
 
 ## Run locally
 
@@ -56,7 +57,7 @@ Player URLs and third-party endpoints are defined in [`script.js`](script.js). T
 
 ## Privacy
 
-This fork does not include ads, analytics, popunders, or streaming embeds. Search, metadata, poster, and font requests still go to the external services listed above, which can receive normal request information such as an IP address and browser headers. See the [Privacy Policy](privacy-policy.html).
+This fork does not include first-party ads or analytics. Search, metadata, poster, font, and playback requests go to the external services listed above, which can receive normal request information such as an IP address and browser headers. See the [Privacy Policy](privacy-policy.html).
 
 ## Contributing
 

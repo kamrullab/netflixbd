@@ -1,5 +1,5 @@
 // Adding this example caching code with no Url's to cache just to tell the browser that this app will work offline so that it can prommpt PWA install.
-const CACHE_NAME = 'netflixbd-v3';
+const CACHE_NAME = 'netflixbd-v4';
 const urlsToCache = [
 "/"
  ];
@@ -9,24 +9,19 @@ self.addEventListener('install', event => {
     caches.open(CACHE_NAME)
       .then(cache => cache.addAll(urlsToCache))
   );
+  self.skipWaiting();
 });
 
 self.addEventListener('activate', event => {
   event.waitUntil(
     caches.keys().then(keys => Promise.all(
       keys.filter(key => key !== CACHE_NAME).map(key => caches.delete(key))
-    ))
+    )).then(() => self.clients.claim())
   );
 });
 
 self.addEventListener('fetch', event => {
   event.respondWith(
-    caches.match(event.request)
-      .then(response => {
-        if (response) {
-          return response;
-        }
-        return fetch(event.request);
-      })
+    fetch(event.request).catch(() => caches.match(event.request))
   );
 });

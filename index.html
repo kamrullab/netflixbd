@@ -30,14 +30,14 @@
       <div class="hero-content">
         <p class="eyebrow"><span></span> Ad-free title discovery</p>
         <h1>Find the story<br><em>worth watching.</em></h1>
-        <p class="hero-copy">Explore movies, series and anime in a fast, focused interface. No popups. No tracking. Just discovery.</p>
+        <p class="hero-copy">Explore movies, series and anime in a fast, focused interface. Search instantly and start playback with one click.</p>
         <form class="search" id="search-form" role="search">
           <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
           <input id="search-input" type="search" autocomplete="off" placeholder="Search a movie or series…" aria-label="Search movies and series">
           <button type="submit">Search</button>
         </form>
         <div class="trust-row" aria-label="Site features">
-          <span>◆ No advertising</span><span>◆ Privacy-first</span><span>◆ Open source</span>
+          <span>◆ No first-party ads</span><span>◆ Instant search</span><span>◆ Open source</span>
         </div>
       </div>
     </section>
@@ -49,6 +49,19 @@
       </div>
       <div id="status" class="status" hidden></div>
       <div id="results" class="results-grid"></div>
+    </section>
+
+    <section id="player" class="player" hidden aria-labelledby="player-title">
+      <div class="player-heading">
+        <div><p class="kicker">Now playing</p><h2 id="player-title">Loading…</h2></div>
+        <button id="player-close" class="player-close" type="button" aria-label="Close player">×</button>
+      </div>
+      <div class="player-frame">
+        <iframe id="player-iframe" title="Video player" src="about:blank"
+          allow="autoplay; fullscreen; picture-in-picture; presentation" referrerpolicy="no-referrer"
+          allowfullscreen></iframe>
+      </div>
+      <p class="player-note">Playback and any content inside this frame are supplied and controlled by an external provider.</p>
     </section>
 
     <section id="details" class="details" hidden aria-labelledby="details-title">
@@ -68,7 +81,7 @@
       <p class="kicker">Why NetflixBD</p>
       <h2>A calmer way to discover.</h2>
       <div class="feature-grid">
-        <article><span>01</span><h3>Zero ad code</h3><p>No ad networks, popunders, analytics pixels, or third-party video embeds.</p></article>
+        <article><span>01</span><h3>One-click playback</h3><p>No first-party ad code or analytics. Select a result and the external player opens automatically.</p></article>
         <article><span>02</span><h3>Fast by design</h3><p>A lightweight static experience with no framework and no account required.</p></article>
         <article><span>03</span><h3>Open source</h3><p>Transparent code you can inspect, improve, and deploy on any static host.</p></article>
       </div>
