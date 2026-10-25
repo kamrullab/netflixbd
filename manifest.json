@@ -1,6 +1,6 @@
 {
-    "short_name": "Netflix Ke Pitaji",
-    "name": "NETFLIX KE PITAJI",
+    "short_name": "NetflixBD",
+    "name": "NetflixBD — Title Discovery",
     "icons": [
       {
         "src": "/icons/android-chrome-192x192.png",
@@ -19,9 +19,8 @@
         "purpose": "maskable"
       }
     ],
-    "start_url": "/index.html",
+    "start_url": "/",
     "display": "minimal-ui",
-    "theme_color": "#111111",
-    "background_color": "#111111"
+    "theme_color": "#08090c",
+    "background_color": "#08090c"
   }
-  

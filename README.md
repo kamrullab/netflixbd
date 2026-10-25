@@ -4,7 +4,7 @@
 [![CI](https://github.com/kamrullab/netflixbd/actions/workflows/ci.yml/badge.svg)](https://github.com/kamrullab/netflixbd/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-NetflixBD is a lightweight, single-page movie and TV discovery interface. It searches IMDb suggestions, uses TMDB metadata for titles and episodes, and loads the selected title in an embedded third-party player.
+NetflixBD is a lightweight, single-page movie and TV discovery interface. It searches IMDb suggestions and uses TMDB metadata to present title details in a clean, responsive interface.
 
 **Live site:** [netflixbd.pages.dev](https://netflixbd.pages.dev/)
 
@@ -14,24 +14,23 @@ NetflixBD is a lightweight, single-page movie and TV discovery interface. It sea
 
 - Movie and TV-series search
 - Shareable search and title URLs
-- Season and episode selection for TV shows
+- Rich title details, genres, ratings, and season counts
 - Responsive, framework-free interface
 - Progressive Web App manifest and service worker
-- No first-party advertising, analytics, or ShareThis tracking scripts
+- No advertising, analytics, popunders, or embedded video providers
 
 ## How it works
 
-The browser requests search suggestions through the configured CORS proxy, resolves IMDb identifiers to TMDB identifiers, and displays third-party embeds in an iframe. The app has no application server or database.
+The browser requests search suggestions through the configured CORS proxy, resolves IMDb identifiers to TMDB identifiers, and displays catalogue metadata. The app has no application server or database.
 
 External services currently used by the app:
 
 - IMDb suggestion data
 - TMDB metadata API
-- `vidsrc.su` video embeds
 - A CORS proxy hosted on Cloudflare Workers
-- jsDelivr for Pace.js
+- Google Fonts
 
-Third-party services may have their own privacy practices, availability limits, and embedded content. Removing this repository's ad and tracking code does not control content served inside a cross-origin player.
+Third-party catalogue services may have their own privacy practices and availability limits. NetflixBD does not include a video player or streaming embed.
 
 ## Run locally
 
@@ -57,7 +56,7 @@ Player URLs and third-party endpoints are defined in [`script.js`](script.js). T
 
 ## Privacy
 
-This fork does not intentionally include first-party ads or analytics. Search, metadata, poster, CDN, and video requests still go to the external services listed above, which can receive normal request information such as an IP address and browser headers. See the [Privacy Policy](privacy-policy.html).
+This fork does not include ads, analytics, popunders, or streaming embeds. Search, metadata, poster, and font requests still go to the external services listed above, which can receive normal request information such as an IP address and browser headers. See the [Privacy Policy](privacy-policy.html).
 
 ## Contributing
 

@@ -1,5 +1,5 @@
 // Adding this example caching code with no Url's to cache just to tell the browser that this app will work offline so that it can prommpt PWA install.
-const CACHE_NAME = 'netflixbd-v2';
+const CACHE_NAME = 'netflixbd-v3';
 const urlsToCache = [
 "/"
  ];

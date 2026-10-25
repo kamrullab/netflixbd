@@ -1,125 +1,90 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-  <meta charset="UTF-8">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#08090c">
+  <meta name="description" content="Discover movies and TV series with NetflixBD — a fast, ad-free title explorer.">
+  <meta property="og:title" content="NetflixBD — Find your next story">
+  <meta property="og:description" content="Search movies and TV series in a clean, ad-free interface.">
+  <meta property="og:image" content="https://netflixbd.pages.dev/og.jpg">
   <link rel="manifest" href="/manifest.json">
   <link rel="apple-touch-icon" href="/icons/apple-touch-icon.png">
-  <link rel="shortcut icon" href="icons/icon.ico" type="image/x-icon">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#4285f4" />
-  <meta name="robots" content="index, follow">
-  <meta property="og:image" content="https://netflixbd.pages.dev/og.jpg"/>
-  <meta name="description"
-    content="Discover and stream your favorite movies and TV shows with NETFLIX KE PITAJI - an open source content search and watch website. Enjoy unlimited access to a vast library of content for free.">
-  <title>NETFLIX KE PITAJI</title>
-  <link rel="preload stylesheet" href="style.min.css" as="style">
-  <link rel="preload stylesheet" href="center-atom.min.css" as="style">
-<!-- Serviceworker code for PWA  -->
-  <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', function() {
-        navigator.serviceWorker.register('/sw.js').then(function(registration) {
-          console.log('Service worker registered: ', registration.scope);
-        }).catch(function(error) {
-          console.log('Service worker registration failed: ', error);
-        });
-      });
-    }
-  </script>
+  <link rel="icon" href="/icons/icon.ico">
+  <link rel="stylesheet" href="style.min.css">
+  <title>NetflixBD — Find your next story</title>
 </head>
-
 <body>
-  <div class="search-container">
-    <input type="search" id="search-input" placeholder="Search any Movie/Webseries/Anime">
-    <button id="search-button">Search</button>
-  </div>
-  <center>
-    <div id="video" class="video">
-      <iframe id="iframe" scrolling="no" src="" frameborder="0"
-        sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-fullscreen"
-        allow="autoplay; fullscreen; picture-in-picture; presentation" referrerpolicy="no-referrer"
-        webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
-      <p style="color: rgb(79, 221, 221); font-weight: 500;">In case of any Error or Too Much Buffering click again on
-        your Movie poster down below or just change the Player from the right corner in video player. </p>
-      <div id="webSeriesData"></div>
-    </div>
-  </center>
-  <div id="results"></div>
-  <center style="margin-top: 2vh;">
-    <div class="alwaysVisibleContent">
-      <h1><u>NETFLIX KE PITAJI</u></h1>
-      <h2 style="color: rgb(55, 255, 255);">Netflix, on us. Free</h2>
-      <h3>Search any Movie/Webseries/Anime</h3>
-      <div class="pagelinks">
-        <a href="/privacy-policy.html" target="_blank">Privacy Policy</a>
-        <a href="/terms-and-conditions.html" target="_blank">Terms And Conditions</a>
-        <a href="https://github.com/kamrullab/netflixbd" target="_blank" rel="noopener noreferrer">Source Code</a>
-        <a href="/contact.html" target="_blank">Contact</a>
+  <header class="site-header">
+    <a class="brand" href="/" aria-label="NetflixBD home"><span>N</span>NetflixBD</a>
+    <nav aria-label="Primary navigation">
+      <a href="#discover">Discover</a>
+      <a href="#about">About</a>
+      <a class="github-link" href="https://github.com/kamrullab/netflixbd" target="_blank" rel="noopener noreferrer">GitHub</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="hero" id="discover">
+      <div class="hero-glow" aria-hidden="true"></div>
+      <div class="hero-content">
+        <p class="eyebrow"><span></span> Ad-free title discovery</p>
+        <h1>Find the story<br><em>worth watching.</em></h1>
+        <p class="hero-copy">Explore movies, series and anime in a fast, focused interface. No popups. No tracking. Just discovery.</p>
+        <form class="search" id="search-form" role="search">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="m21 21-4.35-4.35m2.35-5.65a8 8 0 1 1-16 0 8 8 0 0 1 16 0Z"/></svg>
+          <input id="search-input" type="search" autocomplete="off" placeholder="Search a movie or series…" aria-label="Search movies and series">
+          <button type="submit">Search</button>
+        </form>
+        <div class="trust-row" aria-label="Site features">
+          <span>◆ No advertising</span><span>◆ Privacy-first</span><span>◆ Open source</span>
+        </div>
       </div>
-    </div>
-    <div class="information">
-      <h2><u>PROJECT INFORMATION</u></h2>
-      <h3>Introduction</h3>
+    </section>
 
-      <p>Netflix ke Pitaji is a one-of-a-kind, open-source project that allows users to search and retrieve data about
-        Movies and Web Shows available on the Internet. This documentation provides a comprehensive overview of the
-        features and functionality of the website, including its data sources, user interface, and community features.
-      </p>
-
-      <h3>Data Sources</h3>
-
-      <p>Netflix ke Pitaji retrieves data from two of the largest movie and TV databases on the internet: IMDB (Internet
-        Movie Database) and TMDB (The Movie Database). This combination of data sources provides a comprehensive and
-        up-to-date movie and TV show library, ensuring that users have access to the latest information on their
-        favorite movies and TV shows.</p>
-
-      <h3>User Interface</h3>
-
-      <p>The website has a simple and user-friendly interface, making it easy for users to navigate and search for
-        movies and TV shows. The no reload feature of this website makes it very unique and super fast. The page load
-        speed of this website is approximately 0.1 Seconds.</p>
-
-      <h3>Movie and TV Show Information</h3>
-
-      <p>The movie and TV show pages on Netflix ke Pitaji provide users with a wealth of information about the movie or
-        TV show. The page includes the poster thumbnail, and information about cast and crew. More information about the
-        Movies and Shows is intentionally not displayed, If you want to display that information then you can modify
-        that in the source code.</p>
-
-      <h3>Single Page Website</h3>
-
-      <p>It is important to note that Netflix ke Pitaji is a single page client side website and does not store any
-        information on
-        its servers. All data is retrieved from IMDB and TMDB and is displayed on the website in real-time. Despite of
-        being a single page website the Url's in addres bar are updated and their event is also handled. Means if you
-        enter a url which contains some data about movies/webseries/search_query the website will load that data same as
-        a normal website with backend does. This means
-        that the website is fast and responsive, providing a seamless user experience for its users.</p>
-
-      <h3>Source Code</h3>
-
-      <p>This maintained fork is based on the original project by Pulkit Pareek. You can access this repository
-        at <a style="color:rgb(0, 140, 255);margin:0%" title="Link to Github Repository" href="https://github.com/kamrullab/netflixbd"
-          target="_blank">Here(Link to Github Repository)</a>.</p>
-
-      <h3>Conclusion</h3>
-
-      <p>In conclusion, Netflix ke Pitaji is an open-source project that provides a comprehensive movie and TV show
-        library and a unique movie-watching experience. With its simple and user-friendly interface, comprehensive movie
-        and TV show information, and the ability to watch movies and TV shows that are available on the internet for
-        free.</p>
-
-      <h3>Libraries Used</h3>
-      <div class="footerLinks">
-        <a href="https://embed.smashystream.com/" target="_blank">Smashy Stream</a>
-        <a href="https://codebyzach.github.io/pace/" target="_blank">PACE</a>
-        <a href="https://tmdb.com" target="_blank">TMDB</a>
-        <a href="https://imdb.com" target="_blank">IMDB</a>
+    <section class="results-section" aria-live="polite">
+      <div class="section-heading">
+        <div><p class="kicker">Explore</p><h2 id="results-title">Search the catalogue</h2></div>
+        <p id="results-count">Type a title above to begin.</p>
       </div>
-    </div>
-  </center>
-  <script src="https://cdn.jsdelivr.net/npm/pace-js@latest/pace.min.js"></script>
+      <div id="status" class="status" hidden></div>
+      <div id="results" class="results-grid"></div>
+    </section>
+
+    <section id="details" class="details" hidden aria-labelledby="details-title">
+      <button id="details-close" class="details-close" type="button" aria-label="Close details">×</button>
+      <div id="details-backdrop" class="details-backdrop"></div>
+      <div class="details-content">
+        <p id="details-type" class="kicker"></p>
+        <h2 id="details-title"></h2>
+        <div id="details-meta" class="details-meta"></div>
+        <p id="details-overview" class="details-overview"></p>
+        <div id="details-genres" class="genre-list"></div>
+        <a id="imdb-link" class="primary-link" target="_blank" rel="noopener noreferrer">View on IMDb <span>↗</span></a>
+      </div>
+    </section>
+
+    <section class="about" id="about">
+      <p class="kicker">Why NetflixBD</p>
+      <h2>A calmer way to discover.</h2>
+      <div class="feature-grid">
+        <article><span>01</span><h3>Zero ad code</h3><p>No ad networks, popunders, analytics pixels, or third-party video embeds.</p></article>
+        <article><span>02</span><h3>Fast by design</h3><p>A lightweight static experience with no framework and no account required.</p></article>
+        <article><span>03</span><h3>Open source</h3><p>Transparent code you can inspect, improve, and deploy on any static host.</p></article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <a class="brand small" href="/"><span>N</span>NetflixBD</a>
+    <p>Independent title discovery. Not affiliated with Netflix.</p>
+    <div><a href="/privacy-policy.html">Privacy</a><a href="/terms-and-conditions.html">Terms</a><a href="/contact.html">Contact</a></div>
+  </footer>
+
+  <noscript><p class="noscript">JavaScript is required to search the catalogue.</p></noscript>
   <script src="script.min.js"></script>
+  <script>
+    if ('serviceWorker' in navigator) window.addEventListener('load', () => navigator.serviceWorker.register('/sw.js'));
+  </script>
 </body>
 </html>
