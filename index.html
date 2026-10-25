@@ -9,19 +9,12 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#4285f4" />
   <meta name="robots" content="index, follow">
-  <meta property="og:image" content="https://netflix-1uh.pages.dev/og.jpg"/>
+  <meta property="og:image" content="https://netflixbd.pages.dev/og.jpg"/>
   <meta name="description"
     content="Discover and stream your favorite movies and TV shows with NETFLIX KE PITAJI - an open source content search and watch website. Enjoy unlimited access to a vast library of content for free.">
   <title>NETFLIX KE PITAJI</title>
   <link rel="preload stylesheet" href="style.min.css" as="style">
   <link rel="preload stylesheet" href="center-atom.min.css" as="style">
-  <!-- Google tag (gtag.js) -->
-  <script defer src="https://www.googletagmanager.com/gtag/js?id=G-THTQ9GZQ0J">
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-    gtag('config', 'G-THTQ9GZQ0J');
-  </script>
 <!-- Serviceworker code for PWA  -->
   <script>
     if ('serviceWorker' in navigator) {
@@ -34,10 +27,6 @@
       });
     }
   </script>
-  <script type="text/javascript" src="https://platform-api.sharethis.com/js/sharethis.js#property=64c60eb01734a80012bd61d3&product=video-share-buttons&source=platform" async="async"></script>
-<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9489381289747189"
-     crossorigin="anonymous"></script>
-
 </head>
 
 <body>
@@ -47,10 +36,12 @@
   </div>
   <center>
     <div id="video" class="video">
-      <iframe id="iframe" scrolling="no" src="" frameborder="0" allow="autoplay; fullscreen; picture-in-picture; scripts; same-origin; forms; presentation" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
+      <iframe id="iframe" scrolling="no" src="" frameborder="0"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-presentation allow-fullscreen"
+        allow="autoplay; fullscreen; picture-in-picture; presentation" referrerpolicy="no-referrer"
+        webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>
       <p style="color: rgb(79, 221, 221); font-weight: 500;">In case of any Error or Too Much Buffering click again on
         your Movie poster down below or just change the Player from the right corner in video player. </p>
-      <!-- ShareThis BEGIN --><div class="sharethis-inline-share-buttons"></div><!-- ShareThis END -->
       <div id="webSeriesData"></div>
     </div>
   </center>
@@ -63,7 +54,7 @@
       <div class="pagelinks">
         <a href="/privacy-policy.html" target="_blank">Privacy Policy</a>
         <a href="/terms-and-conditions.html" target="_blank">Terms And Conditions</a>
-        <a href="https://github.com/pulkitpareek18/netflix" target="_blank">Source Code</a>
+        <a href="https://github.com/kamrullab/netflixbd" target="_blank" rel="noopener noreferrer">Source Code</a>
         <a href="/contact.html" target="_blank">Contact</a>
       </div>
     </div>
@@ -108,8 +99,8 @@
 
       <h3>Source Code</h3>
 
-      <p>The Source Code of this Tool is available at Github repository by Pulkit Pareek. You can access the repository
-        at <a style="color:rgb(0, 140, 255);margin:0%" title="Link to Github Repository" href="https://github.com/pulkitpareek18/netflix"
+      <p>This maintained fork is based on the original project by Pulkit Pareek. You can access this repository
+        at <a style="color:rgb(0, 140, 255);margin:0%" title="Link to Github Repository" href="https://github.com/kamrullab/netflixbd"
           target="_blank">Here(Link to Github Repository)</a>.</p>
 
       <h3>Conclusion</h3>

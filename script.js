@@ -313,7 +313,6 @@ async function setAll(imdb, title, season, episode, type) {
 function setVideo(element) {
   const iframe = document.getElementById(PLAYER_CONFIG.iframeId);
   const video = document.getElementById(PLAYER_CONFIG.videoContainerId);
-  iframe.removeAttribute("sandbox");
   iframe.src = element.getAttribute("href");
   video.style.display = "block";
   const webSeriesData = document.getElementById("webSeriesData");
@@ -416,16 +415,6 @@ function setVideo(element) {
     printEpisodes();
   } else {
   }
-
-  // pushing data to analytics by gtag
-
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
-
-  gtag("config", "G-THTQ9GZQ0J");
 
   highlightCards();
 

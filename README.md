@@ -1,83 +1,72 @@
+# NetflixBD
 
-# NETFLIX KE PITAJI
+[![Live site](https://img.shields.io/badge/live-netflixbd.pages.dev-e50914)](https://netflixbd.pages.dev/)
+[![CI](https://github.com/kamrullab/netflixbd/actions/workflows/ci.yml/badge.svg)](https://github.com/kamrullab/netflixbd/actions/workflows/ci.yml)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 
-[![CI](https://github.com/pulkitpareek18/netflix/actions/workflows/ci.yml/badge.svg)](https://github.com/pulkitpareek18/netflix/actions/workflows/ci.yml)
-[![Semgrep](https://github.com/pulkitpareek18/netflix/actions/workflows/semgrep.yml/badge.svg)](https://github.com/pulkitpareek18/netflix/actions/workflows/semgrep.yml)
-![Last Commit](https://img.shields.io/github/last-commit/pulkitpareek18/netflix)
-![Stars](https://img.shields.io/github/stars/pulkitpareek18/netflix)
+NetflixBD is a lightweight, single-page movie and TV discovery interface. It searches IMDb suggestions, uses TMDB metadata for titles and episodes, and loads the selected title in an embedded third-party player.
 
-## Release Snapshot (March 2026)
+**Live site:** [netflixbd.pages.dev](https://netflixbd.pages.dev/)
 
-- Status: Active
-- Type: Static streaming-style web app
-- Live demo: https://netflix-1uh.pages.dev
-- CI checks: JavaScript syntax + static file integrity
-
-## Demo Card
-
-[![Netflix Ke Pitaji Demo](https://raw.githubusercontent.com/pulkitpareek18/netflix/main/netflix-ke-pitaji.gif)](https://netflix-1uh.pages.dev)
-
-
-Watch all your favourite movies, web series, TV shows and anime for free. 
-
-[!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/pulkitpareek18)
-
-
-
-## Demo
-
-https://netflix-1uh.pages.dev
-
-## GIF
-
-![App GIF](https://raw.githubusercontent.com/pulkitpareek18/netflix/main/netflix-ke-pitaji.gif)
-
-
-## Run Locally
-
-Clone the project
-
-```bash
-  git clone https://github.com/pulkitpareek18/netflix
-```
-
-Open the project directory and run `index.html`.
-
+> This project is not affiliated with, endorsed by, or sponsored by Netflix. Netflix and related marks belong to their respective owners. Availability and behavior of third-party data and video providers are outside this project's control. Use the project only where permitted by applicable law and the providers' terms.
 
 ## Features
 
-- Watch any movie, webseries, TV show or anime for free.
-- **Url Sharing**  
-    Despite of being a single page website built wihout any framework, you can still share url's of movies and other shows.
-- Ultra fast loading.
-- Single page website.
+- Movie and TV-series search
+- Shareable search and title URLs
+- Season and episode selection for TV shows
+- Responsive, framework-free interface
+- Progressive Web App manifest and service worker
+- No first-party advertising, analytics, or ShareThis tracking scripts
 
+## How it works
 
+The browser requests search suggestions through the configured CORS proxy, resolves IMDb identifiers to TMDB identifiers, and displays third-party embeds in an iframe. The app has no application server or database.
 
+External services currently used by the app:
 
-## Acknowledgements
+- IMDb suggestion data
+- TMDB metadata API
+- `vidsrc.su` video embeds
+- A CORS proxy hosted on Cloudflare Workers
+- jsDelivr for Pace.js
 
-- [Pace.js](https://codebyzach.github.io/pace/e.com/project/elangosundar/awesome-README-templates)
-- IMDB
-- TMDB
-- Smashy Stream
+Third-party services may have their own privacy practices, availability limits, and embedded content. Removing this repository's ad and tracking code does not control content served inside a cross-origin player.
 
-## Authors
+## Run locally
 
-- [@pulkitpareek18](https://www.github.com/pulkitpareek18)
+```bash
+git clone https://github.com/kamrullab/netflixbd.git
+cd netflixbd
+npx serve .
+```
 
+Then open the local URL printed by the server. A local server is recommended because service workers and browser security rules may not work correctly when `index.html` is opened directly from disk.
+
+## Deploy
+
+The project is a static site and can be deployed to Cloudflare Pages without a build command:
+
+- Build command: leave empty
+- Build output directory: `/`
+- Production branch: `main`
+
+## Configuration
+
+Player URLs and third-party endpoints are defined in [`script.js`](script.js). The current TMDB API key is shipped in browser code and should be replaced with your own restricted key or moved behind a server-side function before production use.
+
+## Privacy
+
+This fork does not intentionally include first-party ads or analytics. Search, metadata, poster, CDN, and video requests still go to the external services listed above, which can receive normal request information such as an IP address and browser headers. See the [Privacy Policy](privacy-policy.html).
 
 ## Contributing
 
-Contributions are always welcome!  
-If you have any new Idea or have found a bug, please don't hesitate to open a Pull Request.
+Bug reports and pull requests are welcome in the [GitHub repository](https://github.com/kamrullab/netflixbd).
 
+## Credits
+
+This repository is a fork of [pulkitpareek18/netflix](https://github.com/pulkitpareek18/netflix). It uses IMDb and TMDB data and the Pace.js loading indicator. Please retain attribution required by upstream code and third-party services.
 
 ## License
 
-[MIT](https://github.com/pulkitpareek18/netflix/blob/main/LICENSE)
-
-
-## Support
-
-For support, email pulkitpareekofficial@gmail.com or ask any query on Twitter.
+Released under the [MIT License](LICENSE).
